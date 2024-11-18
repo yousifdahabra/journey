@@ -8,3 +8,9 @@ class Node {
         $this->next = null;
     }
 }
+class LinkedList {
+    public $head;
+    public function __construct() {
+        $this->head = null;
+    }
+}
