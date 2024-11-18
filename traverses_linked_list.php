@@ -1,4 +1,5 @@
 <?php 
+//http://localhost/journey/traverses_linked_list.php?list=[%22apple%22,%22orange%22,%22tree%22,%22sky%22,%22house%22]
 class Node {
     public $value;
     public $next;
@@ -50,3 +51,27 @@ class LinkedList {
     }
 
 }
+
+
+if (isset($_GET['list'])) {
+    if (strlen($_GET['list']) > 0) {
+        $list = json_decode($_GET['list'], true);
+        $linkedList = new LinkedList();
+        foreach ($list as $value) {
+            $linkedList->add_node($value);
+        }
+        $filtered = $linkedList->traverse_filter();
+        $response = [
+            "states" => "1",
+            "filtered_values" => $filtered
+        ];
+        echo json_encode($response);
+    } else {
+        $response = [
+            "states" => "0",
+            "message" => "please provide a valid list"
+        ];
+        echo json_encode($response);
+    }
+}
+
