@@ -29,3 +29,21 @@ function merge_sort($list){
     $right_part = merge_sort($right_part);
     return merge($left_part, $right_part);
 }
+
+if(isset($_GET['list'])){
+    if(strlen($_GET['list']) > 0){
+        $list = json_decode($_GET['list'], true);
+        $sorted_list = merge_sort($list);
+        $response = [
+            "states" => "1",
+            "sorted_list" => $sorted_list
+        ];
+        echo json_encode($response);
+    }else{
+        $response = [
+            "states" => "0",
+            "message" => "please provide a valid list"
+        ];
+        echo json_encode($response);
+    }
+}
