@@ -1,9 +1,18 @@
 <?php
 
-class User
+class Users
 {
-    function check_password($password)
+    public $email;
+    public $password;
+
+    public function __construct($optional) {
+        $this->email = $optional['email'];
+        $this->password = $optional['password'];
+    }
+
+    function check_password()
     {
+        $password = $this->password ;
         if (strlen($password) >= 12) {
             if (preg_match('/[A-Z]/', $password)) {
                 if (preg_match('/[a-z]/', $password)) {
@@ -38,7 +47,8 @@ class User
         }
     }
 
-    function validate_email($email){
+    function validate_email(){
+        $email = $this->email;
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             return [
                 "states" => "1",
@@ -53,5 +63,7 @@ class User
 
     }
 
-
+    function copy_with($optional = []){
+        return new Users($optional);
+    }
 }
