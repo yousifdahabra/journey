@@ -37,4 +37,16 @@ class LinkedList {
         return $count;
     }
 
+    public function traverse_filter() {
+        $current = $this->head;
+        $filtered = [];
+        while ($current !== null) {
+            if ($this->count_vowels($current->value) === 2) {
+                $filtered[] = $current->value;
+            }
+            $current = $current->next;
+        }
+        return $filtered;
+    }
+
 }
